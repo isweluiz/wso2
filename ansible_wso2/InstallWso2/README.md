@@ -1,31 +1,63 @@
-Role Name
-=========
 
-A brief description of the role goes here.
+```bash
+[root@localhost ansible]# ansible-playbook  install_wso2.yml
 
-Requirements
-------------
+PLAY [Install WSO2] ***********************************************************************************
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+TASK [Gathering Facts] ********************************************************************************
+ok: [54.84.18.16]
 
-Role Variables
---------------
+TASK [InstallWso2 : Install Java and Wget] ************************************************************
+ok: [54.84.18.16]
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+TASK [InstallWso2 : Create directory] *****************************************************************
+changed: [54.84.18.16]
 
-Dependencies
-------------
+TASK [InstallWso2 : Unarchive WSO2 file] **************************************************************
+changed: [54.84.18.16]
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+TASK [InstallWso2 : Download wso2 init] ***************************************************************
+changed: [54.84.18.16]
+
+TASK [InstallWso2 : Download wso2 service] ************************************************************
+changed: [54.84.18.16]
+
+TASK [InstallWso2 : Create user WSO2] *****************************************************************
+changed: [54.84.18.16]
+
+TASK [InstallWso2 : Change permissions] ***************************************************************
+changed: [54.84.18.16]
+
+TASK [InstallWso2 : Create symbolic link] *************************************************************
+changed: [54.84.18.16]
+
+TASK [InstallWso2 : Get IP] ***************************************************************************
+changed: [54.84.18.16]
+
+TASK [InstallWso2 : Change IP configurations] *********************************************************
+changed: [54.84.18.16]
+
+TASK [InstallWso2 : Download wso2 motd] ***************************************************************
+ok: [54.84.18.16]
+
+TASK [InstallWso2 : Start service] ********************************************************************
+changed: [54.84.18.16]
+
+PLAY RECAP ********************************************************************************************
+54.84.18.16                : ok=13   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
 
 Example Playbook
 ----------------
+install_wso2.yml
+---
+- name: Install WSO2
+  hosts: wso2
+  become: true
+  roles:
+    - InstallWso2
+...
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
 
 License
 -------
@@ -35,4 +67,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+https://github.com/isweluiz/
