@@ -1,0 +1,10 @@
+        EC2 - LAB
+        WSO2 API MANAGER
+        Manage service WSO2 APM
+        ---
+        systemctl start wso2
+        systemctl stop wso2
+        wso2-logs
+        ---
+        Install dir
+        /opt/apm/wso2
