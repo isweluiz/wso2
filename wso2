@@ -1,5 +1,5 @@
 #! /bin/sh
-export JAVA_HOME='/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/jre/'
+export JAVA_HOME='/usr/lib/jvm/jre/'
 export API_M_HOME='/opt/apm/wso2'
 startcmd='${API_M_HOME}/bin/wso2server.sh start > /dev/null &'
 restartcmd='${API_M_HOME}/bin/wso2server.sh restart > /dev/null &'
