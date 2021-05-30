@@ -43,6 +43,22 @@ echo alias  stopcmd='"${API_M_HOME}/bin/wso2server.sh stop > /dev/null &"' >>  ~
 source ~/.bashrc
 }
 
+CreateMotd () {
+cat << EOF > /etc/motd 
+        EC2 - LAB
+        WSO2 API MANAGER
+
+        Manage service WSO2 APM
+        ---
+        systemctl start wso2
+        systemctl stop wso2
+        wso2-logs
+        ---
+        Install dir
+        /opt/apm/wso2
+EOF
+}
+
 for job in $X; do
     InstallWso2
     CreateAlias
