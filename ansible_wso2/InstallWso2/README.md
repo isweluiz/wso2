@@ -50,6 +50,8 @@ PLAY RECAP *********************************************************************
 Example Playbook
 ----------------
 install_wso2.yml
+
+```ỳaml
 ---
 - name: Install WSO2
   hosts: wso2
@@ -57,7 +59,7 @@ install_wso2.yml
   roles:
     - InstallWso2
 ...
-
+```
 
 License
 -------
