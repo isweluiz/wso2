@@ -1,10 +1,10 @@
 #!/bin/bash
-
+X=1 
 init_script="https://raw.githubusercontent.com/isweluiz/wso2/main/wso2"
 service="https://raw.githubusercontent.com/isweluiz/wso2/main/wso2.service"
 wso2_s3="https://lab-tec.s3.amazonaws.com/wso2am-3.2.0.zip"
 
-install_configure_wso2 {
+InstallWso2 () {
 #Install java and wget
 yum install -y java wget 
 
@@ -35,7 +35,7 @@ systemctl enable wso2
 systemctl start wso2
 }
 
-create_alias {
+CreateAlias () {
 echo alias wso2-logs='"tail -f /opt/apm/wso2/repository/logs/wso2carbon.log"' >>  ~/.bashrc
 echo alias startcmd='"${API_M_HOME}/bin/wso2server.sh start > /dev/null &"' >>  ~/.bashrc
 echo alias restartcmd='"${API_M_HOME}/bin/wso2server.sh restart > /dev/null &"' >>  ~/.bashrc
@@ -43,6 +43,13 @@ echo alias  stopcmd='"${API_M_HOME}/bin/wso2server.sh stop > /dev/null &"' >>  ~
 source ~/.bashrc
 }
 
-install_configure_wso2
-create_alias
+for job in $X; do
+    InstallWso2
+    CreateAlias
 
+  if [ $? -eq 0 ]; then
+    echo "WSO2 installed with sucessfull." >> /opt/wso2-install.out
+  else 
+    echo "Install failed."  >> /opt/wso2-install.out
+  fi
+done
