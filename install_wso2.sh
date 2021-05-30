@@ -1,24 +1,34 @@
 #!/bin/bash
 
+init_script="https://raw.githubusercontent.com/isweluiz/wso2/main/wso2"
+service="https://raw.githubusercontent.com/isweluiz/wso2/main/wso2.service"
+wso2_s3="https://lab-tec.s3.amazonaws.com/wso2am-3.2.0.zip"
+
+#Install java and wget
 yum install -y java wget 
-mkdir /opt/apm/ 
 
 #Download wso2
-wget  https://lab-tec.s3.amazonaws.com/wso2am-3.2.0.zip -O /opt/apm/wso2am-3.2.0.zip
+mkdir /opt/apm/ 
+wget $wso2_s3 -O /opt/apm/wso2am-3.2.0.zip
 
-#Download init script 
-wget https://raw.githubusercontent.com/isweluiz/wso2/main/wso2 -O /etc/init.d/wso2
-chmod +x /etc/init.d/wso2
-
-#Download service 
-wget https://raw.githubusercontent.com/isweluiz/wso2/main/wso2.service -O /etc/systemd/system/wso2.service
-systemctl daemon-reload
-
-
-
+#Configuring directory wso2
 cd /opt/apm/ 
 unzip wso2am-3.2.0.zip
 ln -s /opt/apm/wso2am-3.2.0 /opt/apm/wso2
 useradd -r wso2
 chown -R wso2:wso2 /opt/apm/
+
+#Download init script 
+wget $init_script -O /etc/init.d/wso2
+chmod +x /etc/init.d/wso2
+
+#Download service 
+wget $service -O /etc/systemd/system/wso2.service
+systemctl daemon-reload
+
+#configuring IP EC2
+ip="$(curl -s ifconfig.me | awk "{print $1}")"
+cp -Rp /opt/apm/wso2/repository/conf/deployment.toml /opt/apm/wso2/repository/conf/deployment.toml.bkp
+sed -i "s/localhost/$ip/g" /opt/apm/wso2/repository/conf/deployment.toml
+systemctl enable wso2
 systemctl start wso2
