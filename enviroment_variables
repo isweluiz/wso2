@@ -1,0 +1,12 @@
+#WSO2
+export JAVA_HOME='/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64/jre/'
+export WSO2_HOME='/opt/apm/wso2'
+export PATH=${JAVA_HOME}/bin:${PATH}
+
+alias wso2='cd ${WSO2_HOME}'
+alias kill-api='ps aux | grep wso2 | grep -v grep | awk "{print $2}" | xargs kill -9 > /dev/null'
+alias startcmd='systemctl start wso2'
+alias statuscmd='systemctl status wso2'
+alias stopcmd='systemctl stop wso2'
+alias restartcmd='systemctl restart wso2'
+alias w2logs='tail -100f  ${WSO2_HOME}/repository/logs/wso2carbon.log'
