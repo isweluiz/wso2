@@ -6,7 +6,7 @@ wso2_s3="https://lab-tec.s3.amazonaws.com/wso2am-3.2.0.zip"
 
 InstallWso2 () {
 #Install java and wget
-yum install -y java wget 
+yum install -y java wget unzip
 
 #Download wso2
 mkdir /opt/apm/ 
